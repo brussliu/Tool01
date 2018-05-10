@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.apache.commons.io.FileUtils;
@@ -115,30 +116,57 @@ public class JPanel2 extends JPanel{
 
                         List<File> list =  (List<File>) (dtde.getTransferable().getTransferData(DataFlavor.javaFileListFlavor));
 
-                        File f = new File("D:\\fileList.txt");
+                        if(list.size() > 1){
+                        	JOptionPane.showMessageDialog(null, "1件ずつ記載お願いします。","注意",JOptionPane.INFORMATION_MESSAGE);
+                        	return;
+                        }
 
-                        for(File file : list){
+                        Object[] obj ={ "常用ファイル", "常用ツール"};
 
-                        	String fileInfo = file.getName() + "=" + file.toString();
+                        String input = (String) JOptionPane.showInputDialog(null,"どこに記載したいですか？:\n", "記載箇所", JOptionPane.PLAIN_MESSAGE,null,obj,"常用ファイル");
 
-                        	if(!fileList.contains(fileInfo)){
+                        if("常用ファイル".equals(input)){
+
+	                        File f = new File("D:\\fileList.txt");
+
+	                        for(File file : list){
+
+	                        	String fileInfo = file.getName() + "=" + file.toString();
+
+	                        	if(!fileList.contains(fileInfo)){
+
+		                        	ArrayList<String> a = new ArrayList<String>();
+		                        	a.add(fileInfo);
+		                            FileUtils.writeLines(f, a, true);
+
+		                            fileList.add(fileInfo);
+	                        	}
+	                        }
+
+	                        mf.jp3.loadfileList();
+	                        mf.jp3.mainPanel.updateUI();
+
+                        }else if("常用ツール".equals(input)){
+
+                        	String toolName = JOptionPane.showInputDialog(null,"ツール名称を入力してください：\n","新しい名称",JOptionPane.PLAIN_MESSAGE);
+
+                        	if(toolName != null && !"".equals(toolName) ){
+
+    	                        File f = new File("D:\\toolList.txt");
 
 	                        	ArrayList<String> a = new ArrayList<String>();
-	                        	a.add(fileInfo);
+	                        	a.add(toolName + "=" + list.get(0).toString());
+
 	                            FileUtils.writeLines(f, a, true);
 
-	                            fileList.add(fileInfo);
+	                            mf.jp4.loadToolList();
+		                        mf.jp4.updateUI();
+
                         	}
+
                         }
 
                         dtde.dropComplete(true);
-
-                        mf.jp3.loadfileList();
-
-                        mf.jp3.mainPanel.updateUI();
-
-
-
 
                     }else{
                         dtde.rejectDrop();

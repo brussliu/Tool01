@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SpringLayout;
 
 import org.apache.commons.io.FileUtils;
+
+import opt.IconExport;
 
 public class JPanel3 extends JPanel{
 
@@ -115,7 +117,9 @@ public class JPanel3 extends JPanel{
 	    SpringLayout layout = new SpringLayout();
 	    p.setLayout(layout);
 
-	    JCheckBox ck = new JCheckBox();
+	    Icon icon = IconExport.exportIcon(fp,2);
+	    JLabel ck = new JLabel(icon,JLabel.CENTER);
+
 	    JLabel fileNameLabel = new JLabel(fn);
 	    fileNameLabel.setForeground(Color.BLUE);
 	    fileNameLabel.setFont(fileNameLabel.getFont().deriveFont(20.0f));

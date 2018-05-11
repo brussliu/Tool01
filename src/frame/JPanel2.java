@@ -23,7 +23,7 @@ public class JPanel2 extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	public JButton jb1,jb2;
+	//public JButton jb1,jb2;
 
 	public static ArrayList<String> fileList = new ArrayList<String>();
 
@@ -31,56 +31,56 @@ public class JPanel2 extends JPanel{
 
     	this.setBorder(BorderFactory.createTitledBorder("ファイル保存"));
 
-    	this.jb1 = new JButton("►");
-    	this.jb1.setFont(this.jb1.getFont().deriveFont(10.0f));
-    	this.jb1.setMargin(new java.awt.Insets(0,0,0,0));
+//    	this.jb1 = new JButton("►");
+//    	this.jb1.setFont(this.jb1.getFont().deriveFont(10.0f));
+//    	this.jb1.setMargin(new java.awt.Insets(0,0,0,0));
+//
+//        this.jb1.setBounds(190, 20, 15, 68);
+//        this.jb1.setVisible(true);
+//
+//        this.jb1.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            	int x = (int) mf.getLocation().getX();
+//            	int y = (int) mf.getLocation().getY();
+//
+//            	mf.setLocation(x - 500, y);
+//            	mf.setSize(mf.getWidth() + 500, mf.getHeight());
+//
+//            	jb2.setVisible(true);
+//            	jb1.setVisible(false);
+//
+//            }
+//        });
 
-        this.jb1.setBounds(190, 20, 15, 68);
-        this.jb1.setVisible(true);
+//    	this.jb2 = new JButton("◄");
+//    	this.jb2.setFont(this.jb1.getFont().deriveFont(10.0f));
+//    	this.jb2.setMargin(new java.awt.Insets(0,0,0,0));
+//
+//        this.jb2.setBounds(190, 20, 15, 68);
+//        this.jb2.setVisible(false);
+//
+//        this.jb2.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            	int x = (int) mf.getLocation().getX();
+//            	int y = (int) mf.getLocation().getY();
+//
+//            	mf.setLocation(x + 500, y);
+//            	mf.setSize(mf.getWidth() - 500, mf.getHeight());
+//
+//            	jb2.setVisible(false);
+//            	jb1.setVisible(true);
+//
+//            }
+//        });
 
-        this.jb1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        this.setBounds(18, 110, 220, 100);
 
-            	int x = (int) mf.getLocation().getX();
-            	int y = (int) mf.getLocation().getY();
-
-            	mf.setLocation(x - 500, y);
-            	mf.setSize(mf.getWidth() + 500, mf.getHeight());
-
-            	jb2.setVisible(true);
-            	jb1.setVisible(false);
-
-            }
-        });
-
-    	this.jb2 = new JButton("◄");
-    	this.jb2.setFont(this.jb1.getFont().deriveFont(10.0f));
-    	this.jb2.setMargin(new java.awt.Insets(0,0,0,0));
-
-        this.jb2.setBounds(190, 20, 15, 68);
-        this.jb2.setVisible(false);
-
-        this.jb2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            	int x = (int) mf.getLocation().getX();
-            	int y = (int) mf.getLocation().getY();
-
-            	mf.setLocation(x + 500, y);
-            	mf.setSize(mf.getWidth() - 500, mf.getHeight());
-
-            	jb2.setVisible(false);
-            	jb1.setVisible(true);
-
-            }
-        });
-
-        this.setBounds(8, 110, 220, 100);
-
-        this.add(this.jb1);
-        this.add(this.jb2);
+//        this.add(this.jb1);
+//        this.add(this.jb2);
     	this.setLayout(null);
 
     	readFileList();
@@ -180,5 +180,11 @@ public class JPanel2 extends JPanel{
         });
     }
 
+    public void close(){
+    	this.setBounds(18, 110 - 80, 220 - 100, 100 - 80);
+    }
 
+    public void open(){
+    	this.setBounds(18, 110, 220, 100);
+    }
 }

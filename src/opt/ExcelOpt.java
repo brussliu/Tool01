@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -17,9 +18,28 @@ import frame.JPanel1;
 
 public class ExcelOpt {
 
-	public static String recordAttendance(Date date,String time1,String time2) {
+	public static String recordAttendance(String day,String time1,String time2) {
 
 		int n = 9;
+
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		if("本日".equals(day)){
+
+		}else if("昨日".equals(day)){
+			calendar.add(Calendar.DATE, -1);
+			date = calendar.getTime();
+		}else if("明日".equals(day)){
+			calendar.add(Calendar.DATE, 1);
+			date = calendar.getTime();
+		}else if("先週金曜".equals(day)){
+			int w = calendar.get(Calendar.DAY_OF_WEEK) + 1;
+			calendar.add(Calendar.DATE, - w );
+			date = calendar.getTime();
+		}
+
 
 		try {
 			SimpleDateFormat dateFormatter1 = new SimpleDateFormat("yy");
@@ -27,13 +47,13 @@ public class ExcelOpt {
 			SimpleDateFormat dateFormatter3 = new SimpleDateFormat("dd");
 			//SimpleDateFormat dateFormatter4 = new SimpleDateFormat("HH");
 
-			String year = dateFormatter1.format(date);
-			String month = dateFormatter2.format(date);
-			String day = dateFormatter3.format(date);
+			String y = dateFormatter1.format(date);
+			String m = dateFormatter2.format(date);
+			String d = dateFormatter3.format(date);
 
-			String sheetName = year + "年" + month + "月";
+			String sheetName = y + "年" + m + "月";
 
-			int row = Integer.parseInt(day) + 7;
+			int row = Integer.parseInt(d) + 7;
 
 			InputStream is = new FileInputStream("D:\\個人利用（劉季）\\個人勤務\\出勤報告(最新).xlsx");
 			Workbook book = WorkbookFactory.create(is);

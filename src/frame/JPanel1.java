@@ -3,7 +3,6 @@ package frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,7 +18,7 @@ public class JPanel1 extends JPanel{
 	private static final long serialVersionUID = 1L;
 
 	public JButton jb1, jb2;
-    public JComboBox<String> jcb1,jcb2;
+    public JComboBox<String> jcb1,jcb2,jcb3;
 
     public static String file = "D:\\個人利用（劉季）\\個人勤務\\出勤報告(最新).xlsx";
 
@@ -52,13 +51,21 @@ public class JPanel1 extends JPanel{
         this.jcb2.addItem("20:30");
         this.jcb2.addItem("21:00");
 
-        this.setBounds(8, 5, 220, 100);
+        this.jcb3 = new JComboBox<String>();
+        this.jcb3.addItem("先週金曜");
+        this.jcb3.addItem("昨日");
+        this.jcb3.addItem("本日");this.jcb3.setSelectedItem("本日");
+        this.jcb3.addItem("明日");
+
+
+        this.setBounds(18, 5, 220, 100);
 
         this.jcb1.setBounds(15, 20, 60, 30);
         this.jcb2.setBounds(80, 20, 60, 30);
+        this.jcb3.setBounds(145, 20, 60, 30);
 
-        this.jb1.setBounds(145, 20, 60, 30);
-        this.jb2.setBounds(15, 55, 190, 30);
+        this.jb1.setBounds(15, 55, 85, 30);
+        this.jb2.setBounds(105, 55, 100, 30);
 
         this.jb1.addActionListener(new ActionListener() {
             @Override
@@ -66,8 +73,9 @@ public class JPanel1 extends JPanel{
 
             	String time1 = jcb1.getSelectedItem().toString();
             	String time2 = jcb2.getSelectedItem().toString();
+            	String day = jcb3.getSelectedItem().toString();
 
-				String n = ExcelOpt.recordAttendance(new Date(), time1, time2);
+				String n = ExcelOpt.recordAttendance(day, time1, time2);
 
 				if("9".equals(n)){
 					JOptionPane.showMessageDialog(null, "出退勤時間記載時に、異常が発生しました。","異常発生",JOptionPane.ERROR_MESSAGE);
@@ -99,6 +107,7 @@ public class JPanel1 extends JPanel{
 
     	this.add(this.jcb1);
     	this.add(this.jcb2);
+    	this.add(this.jcb3);
 
     	this.add(this.jb1);
     	this.add(this.jb2);
@@ -107,5 +116,10 @@ public class JPanel1 extends JPanel{
 
     }
 
-
+    public void close(){
+    	this.setBounds(18, 5, 220 - 100, 100 - 80);
+    }
+    public void open(){
+    	this.setBounds(18, 5, 220, 100);
+    }
 }

@@ -48,7 +48,7 @@ public class JPanel4 extends JPanel{
 
         loadToolList();
 
-        this.setBounds(8, 215, 220, 65);
+        this.setBounds(18, 215, 220, 65);
 
     	this.setLayout(null);
 
@@ -212,5 +212,14 @@ public class JPanel4 extends JPanel{
 		}
 	}
 
+    public void close(){
+
+    	this.setBounds(18, 215 - 160, 220 - 100, 65 - 45);
+    }
+
+    public void open(){
+
+    	this.setBounds(18, 215, 220, 65);
+    }
 }
 

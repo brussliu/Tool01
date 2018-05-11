@@ -42,7 +42,7 @@ public class JPanel3 extends JPanel{
     	loadfileList();
 
 
-        this.setBounds(240, 5, 488, 275);
+        this.setBounds(260, 5, 488, 275);
 
 
 
@@ -53,7 +53,7 @@ public class JPanel3 extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-            	mf.jp2.jb1.setVisible(true);
+//            	mf.jp2.jb1.setVisible(true);
 
             	int x = (int) mf.getLocation().getX();
             	int y = (int) mf.getLocation().getY();
@@ -254,7 +254,9 @@ public class JPanel3 extends JPanel{
 		return p;
 	}
 
-
+//    public void close(){
+//    	this.setBounds(28, 110, 220, 20);
+//    }
 
 
 }

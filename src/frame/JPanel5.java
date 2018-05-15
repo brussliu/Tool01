@@ -99,7 +99,7 @@ public class JPanel5 extends JPanel{
             	jrb2.setEnabled(false);
             	jrb3.setEnabled(false);
 
-            	ol.start();
+            	ol.startHotKey();
 
 
             }
@@ -115,7 +115,7 @@ public class JPanel5 extends JPanel{
             	jrb2.setEnabled(true);
             	jrb3.setEnabled(true);
 
-            	ol.stop();
+            	ol.stopHotKey();
             }
         });
 

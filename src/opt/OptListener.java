@@ -26,7 +26,7 @@ public class OptListener implements Runnable{
 
 	public boolean copy1,copy2,paste1;
 
-	public boolean enable;
+	public boolean enableHotKey,enableCaptrue;
 
 	public static HHOOK mouseHHK, keyboardHHK;
     public static LowLevelMouseProc mouseHook;
@@ -43,9 +43,9 @@ public class OptListener implements Runnable{
         User32.INSTANCE.UnhookWindowsHookEx(mouseHHK);
     }
 
-    public void start() {
+    public void startHotKey() {
 
-    	enable = true;
+    	enableHotKey = true;
 
     	if (t == null) {
     		t = new Thread (this,"OptListener");
@@ -54,9 +54,26 @@ public class OptListener implements Runnable{
 
     }
 
-    public void stop() {
+    public void stopHotKey() {
 
-    	enable = false;
+    	enableHotKey = false;
+
+    }
+
+    public void startCaptrue() {
+
+    	enableCaptrue = true;
+
+    	if (t == null) {
+    		t = new Thread (this,"OptListener");
+    		t.start ();
+    	}
+
+    }
+
+    public void stopCaptrue() {
+
+    	enableCaptrue = false;
 
     }
 
@@ -68,7 +85,7 @@ public class OptListener implements Runnable{
             @Override
             public LRESULT callback(int nCode, WPARAM wParam, KBDLLHOOKSTRUCT lParam) {
 
-            	if(enable == true){
+            	if(enableHotKey == true){
             		changeHotKey(wParam.intValue(),lParam.vkCode);
             	}
 
@@ -87,7 +104,7 @@ public class OptListener implements Runnable{
 			@Override
 	         public LRESULT callback(int nCode, WPARAM wParam, MOUSEHOOKSTRUCT lParam) {
 
-				if(enable == true){
+				if(enableHotKey == true){
             		changeHotKey(memo,wParam.intValue(),lParam.pt);
 				}
 
